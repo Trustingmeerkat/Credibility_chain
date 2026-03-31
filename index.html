@@ -1,1 +1,381 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credibility Chain</title>
+  <meta name="description" content="Credibility Chain is a structured reasoning network with self-derived reliability." />
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --bg-soft: #11151a;
+      --panel: rgba(255,255,255,0.04);
+      --panel-border: rgba(255,255,255,0.1);
+      --text: #f4f4f0;
+      --muted: #b7bdc7;
+      --accent: #e8d7a5;
+      --accent-2: #8fb6ff;
+      --max: 1120px;
+      --radius: 22px;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(143,182,255,0.12), transparent 32%),
+        radial-gradient(circle at top right, rgba(232,215,165,0.09), transparent 25%),
+        linear-gradient(180deg, #090b0e 0%, #0f1318 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      padding: 22px 0 10px;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 56px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-copy {
+      padding: 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 8vw, 5.4rem);
+      line-height: 0.94;
+      margin: 0 0 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .subheadline {
+      font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+      color: var(--accent);
+      margin: 0 0 24px;
+      max-width: 36rem;
+    }
+
+    .body-copy {
+      font-size: 1.06rem;
+      color: var(--text);
+      max-width: 45rem;
+    }
+
+    .body-copy p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #0d1014;
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,0.14);
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-aside {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .stat-block {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stat {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .stat-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-value {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      line-height: 1.15;
+    }
+
+    .aside-note {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .paper-section {
+      padding: 10px 0 48px;
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .section-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.05;
+    }
+
+    .section-copy {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 42rem;
+    }
+
+    .pdf-frame {
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #171b21;
+      min-height: 78vh;
+    }
+
+    .pdf-frame object {
+      display: block;
+      width: 100%;
+      height: 78vh;
+      border: 0;
+      background: #fff;
+    }
+
+    .fallback {
+      padding: 24px;
+      color: #111;
+      background: #fff;
+      font-size: 1rem;
+    }
+
+    footer {
+      padding: 28px 0 44px;
+    }
+
+    .footer-line {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.98rem;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-aside,
+      .section-card {
+        padding: 24px;
+      }
+
+      .pdf-frame,
+      .pdf-frame object {
+        min-height: 68vh;
+        height: 68vh;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100% - 20px, var(--max));
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">Credibility Chain</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-grid">
+          <article class="card hero-copy">
+            <div class="eyebrow">Structured reasoning • self-derived reliability</div>
+            <h1>Credibility Chain</h1>
+            <p class="subheadline">A structured reasoning network with self-derived reliability.</p>
+
+            <div class="body-copy">
+              <p>We have accepted that information cannot be trusted on its own merits. We treat this as a permanent condition. It is not. It is an infrastructure problem.</p>
+
+              <p>This paper proposes a system in which any entity — human or machine — can query a piece of reasoning and receive a measure of how much it deserves to be believed. Not based on who said it. Based on its logical structure and track record.</p>
+
+              <p>The core whitepaper is four pages. It lays out the argument, the mechanism, and the reliability model. The remaining pages decompose the paper’s own claims into structured arguments and express them in machine-readable form.</p>
+
+              <p>The document practices what it preaches.</p>
+            </div>
+
+            <div class="actions">
+              <a class="btn btn-primary" href="#whitepaper">Read the whitepaper</a>
+              <a class="btn btn-secondary" href="Credibility Chain_ A Structured Reasoning Network with Self-Derived Reliability.pdf" target="_blank" rel="noopener">Open PDF</a>
+            </div>
+          </article>
+
+          <aside class="card hero-aside" aria-label="Whitepaper summary">
+            <div class="stat-block">
+              <div class="stat">
+                <span class="stat-label">Core claim</span>
+                <div class="stat-value">Trust the structure, not the source.</div>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Primary signal</span>
+                <div class="stat-value">Independent convergence across reasoning paths.</div>
+              </div>
+              <div class="stat">
+                <span class="stat-label">What gets measured</span>
+                <div class="stat-value">Validity, graph structure, downstream use, and track record.</div>
+              </div>
+            </div>
+
+            <p class="aside-note">Append-only recording, semantic deduplication, and visible contradiction are part of the proposed infrastructure, not afterthoughts.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="paper-section" id="whitepaper">
+        <div class="card section-card">
+          <div class="section-top">
+            <div>
+              <h2 class="section-title">Read the whitepaper.</h2>
+              <p class="section-copy">Embedded below from the root folder. If your browser blocks inline PDF viewing, use the direct PDF link above.</p>
+            </div>
+          </div>
+
+          <div class="pdf-frame">
+            <object data="Credibility Chain_ A Structured Reasoning Network with Self-Derived Reliability.pdf#view=FitH" type="application/pdf" aria-label="Credibility Chain whitepaper PDF">
+              <div class="fallback">
+                <p>Your browser could not display the PDF inline.</p>
+                <p><a href="Credibility Chain_ A Structured Reasoning Network with Self-Derived Reliability.pdf">Open the whitepaper directly</a>.</p>
+              </div>
+            </object>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-line">Strength is earned, not declared.</div>
+    </footer>
+  </div>
+</body>
+</html>
